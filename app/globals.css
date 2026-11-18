@@ -1,11 +1,8 @@
-/* Tailwind layers retained for the Next.js project. */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800;900&family=Rajdhani:wght@500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Exact embedded stylesheet from the supplied infinity.html. */
-
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800;900&family=Rajdhani:wght@500;600;700&display=swap');
 
         /* Full-screen Overlay Container */
         #userMenuOverlay {
