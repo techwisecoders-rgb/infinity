@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 import { LEGACY_MARKUP } from "@/components/legacy-markup";
 
 /**
- * The legacy page mutates its DOM extensively and includes inline event handlers.
- * Mount it after hydration so React never compares a browser-normalized legacy
- * fragment against server HTML (which caused the hydration warning).
+ * Mounts the original single-page Infinity interface after hydration.
+ * The legacy application uses inline onclick attributes and direct DOM updates,
+ * so it is intentionally mounted as one isolated legacy DOM subtree.
  */
 export default function InfinityLegacyApp() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -15,17 +15,15 @@ export default function InfinityLegacyApp() {
     const root = rootRef.current;
     if (!root) return;
 
-    // React renders an empty root on both server and first client render.
-    // Inject the original markup only after hydration has finished.
-    if (!root.hasChildNodes()) {
+    if (!root.dataset.legacyMounted) {
       root.innerHTML = LEGACY_MARKUP;
+      root.dataset.legacyMounted = "true";
     }
 
-    // Load the interaction layer once, only after its target markup exists.
-    // The element-id guard also prevents duplicate execution in React Strict Mode.
-    if (!document.getElementById("infinity-legacy-script")) {
+    const scriptId = "infinity-legacy-script";
+    if (!document.getElementById(scriptId)) {
       const script = document.createElement("script");
-      script.id = "infinity-legacy-script";
+      script.id = scriptId;
       script.src = "/legacy.js";
       script.async = false;
       script.onerror = () => {
@@ -33,6 +31,11 @@ export default function InfinityLegacyApp() {
       };
       document.body.appendChild(script);
     }
+
+    return () => {
+      // Keep the injected legacy DOM and script alive across React Strict Mode's
+      // development effect cleanup/re-run. The page is a single-page legacy app.
+    };
   }, []);
 
   return <div id="infinity-app-root" ref={rootRef} />;
