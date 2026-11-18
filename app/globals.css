@@ -1,10 +1,13 @@
-/* Haisuperhero stack: Tailwind CSS + the original Infinity visual system. */
+/* Tailwind layers retained for the Next.js project. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Original page stylesheet. */
-/* Full-screen Overlay Container */
+/* Exact embedded stylesheet from the supplied infinity.html. */
+
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+        /* Full-screen Overlay Container */
         #userMenuOverlay {
             display: none;
             position: fixed;
@@ -977,15 +980,6 @@
             box-shadow: 0 0 14px rgba(0, 240, 255, 0.35);
         }
 
-        .comments-fab:hover {
-            border-color: #ff007f;
-            box-shadow: 0 0 18px rgba(255, 0, 127, 0.45);
-        }
-
-        .create-post-fab:hover {
-            border-color: #ff007f;
-            box-shadow: 0 0 18px rgba(255, 0, 127, 0.45);
-        }
 
         .footer-item {
             display: flex;
@@ -2171,3 +2165,4 @@
         .main-container {
             min-width: 0;
         }
+    
