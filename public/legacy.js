@@ -1,6 +1,4 @@
-// Original page interaction logic, loaded after the client mounts the legacy markup.
-var isMarketOpen = false;
-window.isMarketOpen = false;
+/* Inline application script extracted from the supplied infinity.html. */
 // ── SOCIAL INTERACTIONS ──
         let activeCommentPost = null;
         let activeCommentButton = null;
@@ -316,10 +314,19 @@ window.isMarketOpen = false;
             document.getElementById('shareModalOverlay').classList.remove('active');
         }
 
+        function setHomeFeedFloatingActionsVisible(visible) {
+            document.querySelectorAll('.home-feed-floating-action').forEach(button => {
+                button.style.display = visible ? 'flex' : 'none';
+            });
+        }
+
+        setHomeFeedFloatingActionsVisible(true);
+
         // ── PROFILE / FEED TOGGLE LOGIC ──
         let activeView = 'home'; // 'home', 'user', or 'company'
 
         function toggleUserPage() {
+            setHomeFeedFloatingActionsVisible(false);
             const userPage = document.getElementById('userProfilePage');
             const companyPage = document.getElementById('personalProfilePage');
             const homeFeed = document.getElementById('socialFeed');
@@ -345,6 +352,7 @@ window.isMarketOpen = false;
         }
 
         function toggleCompanyPage() {
+            setHomeFeedFloatingActionsVisible(false);
             const userPage = document.getElementById('userProfilePage');
             const companyPage = document.getElementById('personalProfilePage');
             const homeFeed = document.getElementById('socialFeed');
@@ -478,12 +486,16 @@ window.isMarketOpen = false;
         }
 
         function filterFeed(type, element) {
+            const homeSelected = type === 'all' &&
+                element?.querySelector('.footer-label')?.textContent.trim().toUpperCase() === 'HOME';
+            setHomeFeedFloatingActionsVisible(homeSelected);
+
             if (document.getElementById('spaceCategoryHeader').style.display !== 'none') {
                 document.getElementById('spaceCategoryHeader').style.display = 'none';
                 document.getElementById('spaceCategoryEmpty')?.remove();
                 document.getElementById('mainHeader').classList.remove('hidden');
                 document.getElementById('marketMatrixPage').style.display = 'none';
-                window.isMarketOpen = false;
+                isMarketOpen = false;
             }
 
             document.querySelectorAll('.footer-item').forEach(item => item.classList.remove('active'));
@@ -600,7 +612,10 @@ window.isMarketOpen = false;
                 container.appendChild(newVideo);
             }
         }
+        let isMarketOpen = false;
+
         function toggleMarketPage() {
+            setHomeFeedFloatingActionsVisible(false);
             const marketPage = document.getElementById('marketMatrixPage');
             const socialPage = document.getElementById('socialMediaPage');
             const header = document.getElementById('mainHeader');
@@ -615,7 +630,7 @@ window.isMarketOpen = false;
             document.getElementById('personalProfilePage').style.display = 'none';
 
             // Set market open state to true
-            window.isMarketOpen = true;
+            isMarketOpen = true;
             marketPage.style.display = 'flex';
             socialPage.style.display = 'none';
             header.classList.add('hidden');
@@ -628,12 +643,13 @@ window.isMarketOpen = false;
         }
 
         function openMarketCategory(type, title) {
+            setHomeFeedFloatingActionsVisible(false);
             const socialPage = document.getElementById('socialMediaPage');
             const feed = document.getElementById('socialFeed');
             const categoryHeader = document.getElementById('spaceCategoryHeader');
 
             activeView = 'home';
-            window.isMarketOpen = false;
+            isMarketOpen = false;
             document.getElementById('marketMatrixPage').style.display = 'none';
             document.getElementById('userProfilePage').style.display = 'none';
             document.getElementById('personalProfilePage').style.display = 'none';
@@ -663,6 +679,7 @@ window.isMarketOpen = false;
         }
 
         function returnToSpaceCategories() {
+            setHomeFeedFloatingActionsVisible(false);
             document.getElementById('spaceCategoryHeader').style.display = 'none';
             document.getElementById('spaceCategoryEmpty')?.remove();
             document.getElementById('socialMediaPage').style.display = 'none';
@@ -670,7 +687,7 @@ window.isMarketOpen = false;
             document.getElementById('mainHeader').classList.add('hidden');
             document.getElementById('socialFeed').querySelectorAll('.social-post-card').forEach(post => post.style.display = 'flex');
             document.querySelector('.fixed-footer').style.display = 'flex';
-            window.isMarketOpen = true;
+            isMarketOpen = true;
             window.scrollTo(0, 0);
         }
 
@@ -738,14 +755,14 @@ window.isMarketOpen = false;
         }
 
         function toggleUserPageFromMarket() {
-            window.isMarketOpen = false;
+            isMarketOpen = false;
             document.getElementById('marketMatrixPage').style.display = 'none';
             document.getElementById('socialMediaPage').style.display = 'flex';
             toggleUserPage();
         }
 
         function toggleCompanyPageFromMarket() {
-            window.isMarketOpen = false;
+            isMarketOpen = false;
             document.getElementById('marketMatrixPage').style.display = 'none';
             document.getElementById('socialMediaPage').style.display = 'flex';
             toggleCompanyPage();
@@ -893,12 +910,13 @@ window.isMarketOpen = false;
         });
 
         function filterJobsFeed(element) {
+            setHomeFeedFloatingActionsVisible(false);
             if (document.getElementById('spaceCategoryHeader').style.display !== 'none') {
                 document.getElementById('spaceCategoryHeader').style.display = 'none';
                 document.getElementById('spaceCategoryEmpty')?.remove();
                 document.getElementById('mainHeader').classList.remove('hidden');
                 document.getElementById('marketMatrixPage').style.display = 'none';
-                window.isMarketOpen = false;
+                isMarketOpen = false;
             }
 
             document.querySelectorAll('.footer-item').forEach(item => item.classList.remove('active'));
@@ -1103,7 +1121,7 @@ window.isMarketOpen = false;
             }
 
             activeView = 'home';
-            window.isMarketOpen = false;
+            isMarketOpen = false;
             document.getElementById('marketMatrixPage').style.display = 'none';
             document.getElementById('visitorFeedPage').style.display = 'none';
             document.getElementById('spaceCategoryHeader').style.display = 'none';
@@ -1790,6 +1808,7 @@ window.isMarketOpen = false;
         initializeEditableProfileFeed(document.getElementById('userFeed'));
 
         function openVisitorFeedPage() {
+            setHomeFeedFloatingActionsVisible(false);
             const visitorContent = document.getElementById('visitorProfileContent');
             if (!visitorContent.hasChildNodes()) {
                 const profileFeed = document.getElementById('userFeedSection').cloneNode(true);
@@ -1804,11 +1823,11 @@ window.isMarketOpen = false;
 
                 const activityTitle = profileFeed.querySelector('.profile-name-title');
                 if (activityTitle && activityTitle.firstChild) {
-                    activityTitle.firstChild.nodeValue = 'VISITOR ACTIVITY ';
+                    activityTitle.firstChild.nodeValue = 'NAME';
                 }
 
                 const handle = profileFeed.querySelector('.profile-handle');
-                if (handle) handle.textContent = '@visitor';
+                if (handle) handle.textContent = '@username';
 
                 profileFeed.querySelectorAll('.profile-tab-btn').forEach(button => {
                     const filter = button.getAttribute('onclick').match(/filterUserTab\('([^']+)'/);
@@ -1820,7 +1839,7 @@ window.isMarketOpen = false;
                 });
 
                 profileFeed.querySelectorAll('.post-author-info h4').forEach(author => {
-                    if (author.firstChild) author.firstChild.nodeValue = 'VISITOR ';
+                    if (author.firstChild) author.firstChild.nodeValue = 'USER ';
                 });
 
                 visitorContent.appendChild(profileFeed);
@@ -1872,6 +1891,7 @@ window.isMarketOpen = false;
             }
 
             if (actionType === 'Register Work') {
+                setHomeFeedFloatingActionsVisible(false);
                 closeUserMenuOverlay();
                 closeAllInfoHub();
                 openWorkerProfilePage();
@@ -1880,6 +1900,7 @@ window.isMarketOpen = false;
 
             if (actionType !== 'Register Business') return;
 
+            setHomeFeedFloatingActionsVisible(false);
             // 1. Close the menu overlay
             closeUserMenuOverlay();
             closeAllInfoHub();
@@ -2417,17 +2438,17 @@ window.isMarketOpen = false;
             <!-- USER ACTIVITY SECTION -->
             <div class="profile-info-section" style="padding: 16px 0 0 0;">
                 <h2 class="profile-name-title" style="font-family: 'Times New Roman', sans-serif; font-size: 1.1rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 6px;">
-                    USER ACTIVITY <i class="fa-solid fa-circle-check" style="color: #00f0ff; font-size: 0.85rem;"></i>
+                    NAME <i class="fa-solid fa-circle-check" style="color: #00f0ff; font-size: 0.85rem;"></i>
                 </h2>
-                <div class="profile-handle" style="font-size: 1rem; color: rgba(255, 255, 255, 0.6); margin-top: 2px;">@user_activity</div>
-                <div class="profile-about-tag" style="font-size: 1rem; color: #00f0ff; font-weight: 700; margin-top: 6px; text-transform: uppercase;">ABOUT: RECENT LOGS & STATS</div>
-                <p class="profile-description" style="font-size: 1rem; color: rgba(255, 255, 255, 0.85); margin-top: 8px; line-height: 1.45;">Overview of user interactions, contributions, and active projects.</p>
+                <div class="profile-handle" style="font-size: 1rem; color: rgba(255, 255, 255, 0.6); margin-top: 2px;">@username</div>
+                <div class="profile-about-tag" style="font-size: 1rem; color: #00f0ff; font-weight: 700; margin-top: 6px; text-transform: uppercase;">ABOUT:</div>
+
                 
                 <div class="profile-stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center;">
-                    <div class="stat-item" style="display: flex; flex-direction: column;"><span class="stat-value" style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 800; color: #00f0ff;">1.2K</span><span class="stat-label" style="font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; margin-top: 2px;">Likes</span></div>
-                    <div class="stat-item" style="display: flex; flex-direction: column;"><span class="stat-value" style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 800; color: #00f0ff;">45</span><span class="stat-label" style="font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; margin-top: 2px;">Reposts</span></div>
-                    <div class="stat-item" style="display: flex; flex-direction: column;"><span class="stat-value" style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 800; color: #00f0ff;">89</span><span class="stat-label" style="font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; margin-top: 2px;">Comments</span></div>
-                    <div class="stat-item" style="display: flex; flex-direction: column;"><span class="stat-value" style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 800; color: #00f0ff;">12</span><span class="stat-label" style="font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; margin-top: 2px;">Shares</span></div>
+                    <div class="stat-item" style="display: flex; flex-direction: column;"><span class="stat-value" style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 800; color: #00f0ff;">0</span><span class="stat-label" style="font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; margin-top: 2px;">Likes</span></div>
+                    <div class="stat-item" style="display: flex; flex-direction: column;"><span class="stat-value" style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 800; color: #00f0ff;">0</span><span class="stat-label" style="font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; margin-top: 2px;">Reposts</span></div>
+                    <div class="stat-item" style="display: flex; flex-direction: column;"><span class="stat-value" style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 800; color: #00f0ff;">0</span><span class="stat-label" style="font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; margin-top: 2px;">Comments</span></div>
+                    <div class="stat-item" style="display: flex; flex-direction: column;"><span class="stat-value" style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 800; color: #00f0ff;">0</span><span class="stat-label" style="font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; margin-top: 2px;">Shares</span></div>
                 </div>
             </div>
 
@@ -2466,5 +2487,123 @@ window.isMarketOpen = false;
                 if (activeSubSection) {
                     activeSubSection.style.display = 'block';
                 }
+            }
+        }
+
+        function initFeedMediaUploaders(feedSelector) {
+            const mediaTypes = {
+                image: {
+                    accept: 'image/*',
+                    prompt: 'Add an image to this post'
+                },
+                video: {
+                    accept: 'video/*',
+                    prompt: 'Add a video to this post'
+                },
+                audio: {
+                    accept: 'audio/*',
+                    prompt: 'Add an audio clip to this post'
+                },
+                file: {
+                    accept: '',
+                    prompt: 'Add a file to this post'
+                }
+            };
+
+            const feed = document.querySelector(feedSelector);
+            if (!feed) return;
+
+            feed.querySelectorAll('.social-post-card').forEach(card => {
+                const type = card.getAttribute('data-type');
+                const config = mediaTypes[type];
+                const container = card.querySelector('.post-media-container');
+
+                if (!config || !container) return;
+
+                // Clear any existing media and build the uploader UI
+                container.innerHTML = `
+            <div class="profile-feed-media-editor">
+                <span>${config.prompt}</span>
+                <label class="profile-feed-upload">
+                    <span>Choose ${type}</span>
+                    <input type="file" ${config.accept ? `accept="${config.accept}"` : ''}>
+                </label>
+                <div class="profile-feed-media-preview"></div>
+            </div>
+        `;
+
+                const input = container.querySelector('input[type="file"]');
+                const preview = container.querySelector('.profile-feed-media-preview');
+
+                input.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    const fileUrl = URL.createObjectURL(file);
+
+                    if (type === 'image') {
+                        preview.innerHTML = `<img src="${fileUrl}" alt="${file.name}">`;
+                    } else if (type === 'video') {
+                        preview.innerHTML = `<video controls playsinline src="${fileUrl}"></video>`;
+                    } else if (type === 'audio') {
+                        preview.innerHTML = `<audio controls src="${fileUrl}"></audio>`;
+                    } else {
+                        preview.innerHTML = `
+                    <div style="padding: 10px; background: rgba(0,240,255,0.1); border-radius: 6px; color: #fff;">
+                        <i class="fa-solid fa-file-lines" style="color: #00f0ff; margin-right: 6px;"></i>
+                        ${file.name} (${(file.size / 1024).toFixed(1)} KB)
+                    </div>
+                `;
+                    }
+                });
+            });
+        }
+
+        // Initialize after the legacy markup has been mounted. In Next.js this
+        // script is injected after hydration, so DOMContentLoaded may have fired.
+        function initializeInfinityFeedMediaUploaders() {
+            initFeedMediaUploaders('#userFeed');
+            initFeedMediaUploaders('#socialFeed');
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeInfinityFeedMediaUploaders, { once: true });
+        } else {
+            initializeInfinityFeedMediaUploaders();
+        }
+
+        function handleCompanyMediaUpload(input, type) {
+            const card = input.closest('.social-post-card');
+            const previewContainer = card.querySelector('.profile-feed-media-preview');
+            const editorBox = card.querySelector('.profile-feed-media-editor');
+
+            if (!input.files || !input.files[0]) return;
+            const file = input.files[0];
+            const fileUrl = URL.createObjectURL(file);
+
+            editorBox.style.display = 'none';
+            previewContainer.innerHTML = '';
+
+            if (type === 'image') {
+                previewContainer.innerHTML = `<img src="${fileUrl}" alt="${file.name}" style="width: 100%; max-height: 350px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1);">`;
+            } else if (type === 'video') {
+                previewContainer.innerHTML = `<video src="${fileUrl}" controls playsinline style="width: 100%; max-height: 350px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1);"></video>`;
+            } else if (type === 'audio') {
+                previewContainer.innerHTML = `<audio src="${fileUrl}" controls style="width: 100%; margin-top: 5px;"></audio>`;
+            } else if (type === 'file') {
+                const sizeKB = (file.size / 1024).toFixed(1);
+                previewContainer.innerHTML = `
+            <div style="background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 8px; padding: 14px; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="fa-solid fa-file-lines" style="font-size: 2.2rem; color: #ff007f;"></i>
+                    <div>
+                        <div style="font-weight: 700; font-size: 0.95rem; color: #fff;">${file.name}</div>
+                        <div style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.6);">${sizeKB} KB</div>
+                    </div>
+                </div>
+                <a href="${fileUrl}" download="${file.name}" style="background: rgba(0, 240, 255, 0.1); padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(0, 240, 255, 0.3); color: #00f0ff; text-decoration: none; font-size: 1rem;">
+                    <i class="fa-solid fa-download"></i>
+                </a>
+            </div>`;
             }
         }
