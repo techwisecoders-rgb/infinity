@@ -1,0 +1,5 @@
+{
+  // This is a Next.js/TypeScript project, not an R project.
+  // Prevent the installed R extension from trying to launch an R language server here.
+  "r.lsp.enabled": false
+}
