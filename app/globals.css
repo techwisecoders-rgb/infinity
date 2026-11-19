@@ -1,8 +1,4 @@
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800;900&family=Rajdhani:wght@500;600;700&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800;900&family=Rajdhani:wght@500;600;700&display=swap');
 
         /* Full-screen Overlay Container */
         #userMenuOverlay {
@@ -2162,4 +2158,7 @@
         .main-container {
             min-width: 0;
         }
-    
+
+#infinity-app-root {
+    display: contents;
+}
