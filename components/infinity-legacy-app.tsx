@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { LEGACY_MARKUP } from "@/components/legacy-markup";
+import WordEditorOverlay from "@/components/word-editor-overlay";
 
 /**
  * Mounts the original single-page Infinity interface after hydration.
@@ -38,5 +39,10 @@ export default function InfinityLegacyApp() {
     };
   }, []);
 
-  return <div id="infinity-app-root" ref={rootRef} style={{ display: "contents" }} />;
+  return (
+    <>
+      <div id="infinity-app-root" ref={rootRef} style={{ display: "contents" }} />
+      <WordEditorOverlay />
+    </>
+  );
 }
