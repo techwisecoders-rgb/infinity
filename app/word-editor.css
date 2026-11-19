@@ -1,0 +1,511 @@
+/* Scoped Word Editor Overlay Styles (from keyboard.html) */
+#wordEditorOverlay {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #d6d6d6;
+    font-family: Arial, sans-serif;
+    z-index: 9999;
+}
+
+#wordEditorOverlay * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* MOBILE APP CONTAINER - LOCKED TO VISUAL VIEWPORT VIA JS */
+#wordEditorOverlay .app {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    height: 100dvh;
+    background: #f0f0f0;
+    box-shadow: 0 0 15px #0002;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+/* PERMANENTLY FIXED HEADER TOOLBAR (NEVER MOVES) */
+#wordEditorOverlay .toolbar {
+    flex-shrink: 0;
+    position: relative;
+    width: 100%;
+    background: #e8e8e8;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-bottom: 1px solid #bbb;
+    z-index: 20;
+}
+
+/* TWO ROWS */
+#wordEditorOverlay .tool-row {
+    height: 36px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px;
+    overflow: hidden;
+}
+
+#wordEditorOverlay .tool-row select {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 30px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    padding: 0 2px;
+    background: white;
+    color: #111;
+    font-size: 11px;
+    text-overflow: ellipsis;
+}
+
+#wordEditorOverlay .font-select {
+    flex: 1.35 1 0 !important;
+}
+
+#wordEditorOverlay .size-select {
+    flex: 0.9 1 0 !important;
+}
+
+#wordEditorOverlay #listStyle {
+    width: auto !important;
+    flex: 1.15 1 0 !important;
+}
+
+#wordEditorOverlay .tool-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 30px;
+    padding: 0;
+    background: #f8f8f8;
+    border: 1px solid #c5c5c5;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #222;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#wordEditorOverlay .tool-btn:active,
+#wordEditorOverlay .tool-btn.active {
+    background: #cbdaf5;
+    border-color: #6588c5;
+}
+
+#wordEditorOverlay .effects-btn,
+#wordEditorOverlay .color-tool-wrapper {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    height: 30px;
+    background: #f8f8f8;
+    border: 1px solid #c5c5c5;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0 1px;
+}
+
+#wordEditorOverlay .effects-btn:active,
+#wordEditorOverlay .effects-btn.active,
+#wordEditorOverlay .color-tool-wrapper:active {
+    background: #cbdaf5;
+    border-color: #6588c5;
+}
+
+#wordEditorOverlay .effects-btn svg,
+#wordEditorOverlay .color-tool-wrapper svg {
+    width: 100%;
+    max-width: 30px;
+    height: 20px;
+    pointer-events: none;
+}
+
+#wordEditorOverlay .color-tool-wrapper input[type="color"] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+}
+
+#wordEditorOverlay .alignment-tools {
+    flex: 4 1 0;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+#wordEditorOverlay .align-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #c5c5c5;
+    border-radius: 3px;
+    background: #f8f8f8;
+    color: #444;
+    padding: 0;
+    cursor: pointer;
+}
+
+#wordEditorOverlay .align-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke-linecap: square;
+}
+
+#wordEditorOverlay .align-btn:active,
+#wordEditorOverlay .align-btn.active {
+    background: #cbdaf5;
+    border-color: #6588c5;
+}
+
+#wordEditorOverlay .line-spacing-wrapper {
+    position: relative;
+    flex: 1.35 1 0;
+    min-width: 0;
+    width: auto;
+    height: 30px;
+    background: #f8f8f8;
+    border: 1px solid #c5c5c5;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#wordEditorOverlay .line-spacing-wrapper:active {
+    background: #cbdaf5;
+    border-color: #6588c5;
+}
+
+#wordEditorOverlay .line-spacing-wrapper svg {
+    width: 100%;
+    max-width: 30px;
+    height: 20px;
+    pointer-events: none;
+}
+
+#wordEditorOverlay .line-spacing-wrapper select {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#wordEditorOverlay .color-box {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    height: 30px;
+    border: 1px solid #bbb;
+    background: white;
+    border-radius: 3px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+#wordEditorOverlay .color-box input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+#wordEditorOverlay .effects-menu {
+    display: none;
+    position: absolute;
+    top: 84px;
+    left: 8px;
+    width: 265px;
+    background: #ffffff;
+    border: 1px solid #b5b5b5;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+    border-radius: 3px;
+    z-index: 999;
+    padding: 8px;
+    user-select: none;
+}
+
+#wordEditorOverlay .effects-menu.open {
+    display: block;
+}
+
+#wordEditorOverlay .preset-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+#wordEditorOverlay .preset-item {
+    height: 42px;
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-family: Calibri, Arial, sans-serif;
+    cursor: pointer;
+}
+
+#wordEditorOverlay .preset-item:hover,
+#wordEditorOverlay .preset-item:active {
+    border-color: #4a7ebb;
+    background: #eef4fc;
+}
+
+#wordEditorOverlay .fx-1, .post-text .fx-1 {
+    color: #000;
+    text-shadow: 1px 1px 1px #888;
+}
+
+#wordEditorOverlay .fx-2, .post-text .fx-2 {
+    color: #4472c4;
+    text-shadow: 1px 1px 2px rgba(68, 114, 196, 0.5);
+}
+
+#wordEditorOverlay .fx-3, .post-text .fx-3 {
+    color: #f8cbad;
+    -webkit-text-stroke: 1px #ed7d31;
+}
+
+#wordEditorOverlay .fx-4, .post-text .fx-4 {
+    color: #fff;
+    -webkit-text-stroke: 1.2px #5b9bd5;
+    text-shadow: 1px 1px 2px #aaa;
+}
+
+#wordEditorOverlay .fx-5, .post-text .fx-5 {
+    color: #ffc000;
+    text-shadow: 1px 1px 0 #b38600, 2px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+#wordEditorOverlay .fx-6, .post-text .fx-6 {
+    color: #a5a5a5;
+    text-shadow: 0 1px 1px #ddd;
+}
+
+#wordEditorOverlay .fx-7, .post-text .fx-7 {
+    color: #5b9bd5;
+    -webkit-box-reflect: below -6px linear-gradient(transparent, rgba(91, 155, 213, 0.4));
+}
+
+#wordEditorOverlay .fx-8, .post-text .fx-8 {
+    color: #fff2cc;
+    -webkit-text-stroke: 1.2px #ffc000;
+    text-shadow: 0 0 6px #ffc000;
+}
+
+#wordEditorOverlay .fx-9, .post-text .fx-9 {
+    color: #fff;
+    -webkit-text-stroke: 1.3px #4472c4;
+    text-shadow: 0 0 5px rgba(68, 114, 196, 0.7);
+}
+
+#wordEditorOverlay .fx-10, .post-text .fx-10 {
+    color: #7f7f7f;
+    text-shadow: 1px 1px 0 #333, -0.5px -0.5px 0 #ccc;
+}
+
+#wordEditorOverlay .fx-11, .post-text .fx-11 {
+    color: #000;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #fff, 3px 3px 0 #555;
+}
+
+#wordEditorOverlay .fx-12, .post-text .fx-12 {
+    color: #262626;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #5b9bd5;
+}
+
+#wordEditorOverlay .fx-13, .post-text .fx-13 {
+    color: #5b9bd5;
+    font-weight: bold;
+    text-shadow: 1.5px 1.5px 0 #bdd7ee, 2.5px 2.5px 0 #2e75b6;
+}
+
+#wordEditorOverlay .fx-14, .post-text .fx-14 {
+    color: #fff;
+    font-weight: bold;
+    -webkit-text-stroke: 1.3px #ed7d31;
+    text-shadow: 2px 2px 0 #ed7d31;
+}
+
+#wordEditorOverlay .fx-15, .post-text .fx-15 {
+    color: #f2f2f2;
+    font-weight: bold;
+    -webkit-text-stroke: 0.6px #bfbfbf;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+}
+
+#wordEditorOverlay .fx-options {
+    padding-top: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+#wordEditorOverlay .fx-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 6px;
+    font-size: 13px;
+    color: #222;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+#wordEditorOverlay .fx-option:hover,
+#wordEditorOverlay .fx-option:active {
+    background: #e5effa;
+}
+
+#wordEditorOverlay .fx-option-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#wordEditorOverlay .fx-icon-badge {
+    width: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* DOCUMENT AREA - ONLY THIS AREA SCROLLS MANUALLY */
+#wordEditorOverlay .document-area {
+    flex: 1;
+    min-height: 0;
+    padding: 12px 9px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+#wordEditorOverlay .page-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+#wordEditorOverlay .floating-page-actions {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    gap: 5px;
+    z-index: 10;
+}
+
+/* FLOATING SEND BUTTON AT BOTTOM RIGHT */
+#wordEditorOverlay .floating-send-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    width: 52px;
+    height: 52px;
+    background: #25d366;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#wordEditorOverlay .floating-send-btn:active {
+    transform: scale(0.92);
+    background: #1ebe5d;
+}
+
+#wordEditorOverlay .floating-send-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: #ffffff;
+    margin-left: 2px;
+}
+
+#wordEditorOverlay .floating-page-actions .tool-btn {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(248, 248, 248, 0.92);
+    border: 1px solid #c5c5c5;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+#wordEditorOverlay .page {
+    width: 100%;
+    min-height: 750px;
+    background: white;
+    padding: 44px 22px 30px 22px;
+    outline: none;
+    border: none;
+    box-shadow: 0 2px 8px #0002;
+    color: #111;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-wrap: break-word;
+}
+
+#wordEditorOverlay .page:empty::before {
+    content: "Social Media Infinity Post .....";
+    color: #aaa;
+    pointer-events: none;
+}
+
+#wordEditorOverlay .page ul,
+#wordEditorOverlay .page ol {
+    padding-left: 28px;
+}
+
+#wordEditorOverlay .page li {
+    padding-left: 3px;
+}
