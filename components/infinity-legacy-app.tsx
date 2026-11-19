@@ -38,5 +38,5 @@ export default function InfinityLegacyApp() {
     };
   }, []);
 
-  return <div id="infinity-app-root" ref={rootRef} />;
+  return <div id="infinity-app-root" ref={rootRef} style={{ display: "contents" }} />;
 }
