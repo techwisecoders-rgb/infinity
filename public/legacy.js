@@ -1069,7 +1069,10 @@
         function submitNewSocialPost() {
             const type = document.getElementById('newPostType').value;
             const author = document.getElementById('newPostAuthor').value.trim() || 'User';
-            const text = document.getElementById('newPostText').value.trim();
+            const textEl = document.getElementById('newPostText');
+            const text = textEl.value.trim();
+            const richHtml = textEl.dataset.richHtml || '';
+            const richBg = textEl.dataset.richBg || '';
             const mediaUrl = document.getElementById('newPostMediaUrl').value.trim();
             if (!text && !mediaUrl) {
                 document.getElementById('newPostText').focus();
@@ -1094,7 +1097,17 @@
                 post.dataset.postMediaUrl = mediaUrl;
                 post.querySelector('.post-avatar').textContent = author.split(/\s+/).filter(Boolean).map(name => name[0]).join('').toUpperCase().substring(0, 2) || 'U';
                 post.querySelector('.post-author-info h4').innerHTML = `${escapeHtml(author)} <span style="font-size:0.7rem;color:#00f0ff;">#${escapeHtml(type)}</span>`;
-                post.querySelector('.post-text').textContent = text;
+                const editPostText = post.querySelector('.post-text');
+                if (richHtml) {
+                    editPostText.innerHTML = richHtml;
+                    if (richBg && richBg.toLowerCase() !== '#ffffff') {
+                        editPostText.style.backgroundColor = richBg;
+                        editPostText.style.padding = '10px';
+                        editPostText.style.color = '#111';
+                    }
+                } else {
+                    editPostText.textContent = text;
+                }
                 post.querySelector('.post-media-container')?.remove();
                 const mediaHtml = getSocialPostMediaHtml(type, mediaUrl);
                 if (mediaHtml) post.querySelector('.post-actions').insertAdjacentHTML('beforebegin', mediaHtml);
@@ -1109,6 +1122,17 @@
                 }
             } else {
                 const newCard = buildSocialPostCard(type, author, text, mediaUrl);
+                if (richHtml) {
+                    const postTextEl = newCard.querySelector('.post-text');
+                    if (postTextEl) {
+                        postTextEl.innerHTML = richHtml;
+                        if (richBg && richBg.toLowerCase() !== '#ffffff') {
+                            postTextEl.style.backgroundColor = richBg;
+                            postTextEl.style.padding = '10px';
+                            postTextEl.style.color = '#111';
+                        }
+                    }
+                }
                 const feedContainer = document.getElementById('socialFeed');
                 feedContainer.prepend(newCard);
 
@@ -1138,7 +1162,9 @@
             editingSocialPostCard = null;
             document.getElementById('newPostType').disabled = false;
             document.getElementById('submitSocialPostButton').textContent = 'Publish Post';
-            document.getElementById('newPostText').value = '';
+            textEl.value = '';
+            delete textEl.dataset.richHtml;
+            delete textEl.dataset.richBg;
             document.getElementById('newPostMediaUrl').value = '';
             closePostCreatorModal();
             window.scrollTo(0, 0);
