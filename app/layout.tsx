@@ -1,9 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import ServiceWorkerRegistration from "@/components/service-worker-registration";
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  title: "INFINITY",
+  title: "Social Media Company",
   description:
     "SOCIAL MEDIA COMPANY",
   applicationName: "Infinity",
