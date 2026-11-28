@@ -33,19 +33,20 @@ export async function GET(request: Request) {
       .order("created_at", { ascending: true });
 
     if (!fetchAll) {
-      const targetId = isValidUuid(requestedUserId) ? requestedUserId : user?.id;
-      if (targetId) {
-        q = q.eq("user_id", targetId);
-      }
+      const targetId = isValidUuid(requestedUserId) ? requestedUserId : user!.id;
+      q = q.eq("user_id", targetId);
     }
     return q;
   };
 
-  if (!fetchAll && (authError || !user) && !isValidUuid(requestedUserId)) {
-    return NextResponse.json(
-      { success: false, error: { code: "UNAUTHORIZED", message: "Authentication required" } },
-      { status: 401 }
-    );
+  // If no valid UUID is provided and not fetching all, we require authentication
+  if (!fetchAll && !isValidUuid(requestedUserId)) {
+    if (authError || !user) {
+      return NextResponse.json(
+        { success: false, error: { code: "UNAUTHORIZED", message: "Authentication required" } },
+        { status: 401 }
+      );
+    }
   }
 
   let { data, error } = await runQuery();
