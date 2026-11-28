@@ -31,14 +31,18 @@ export async function GET(request: Request) {
     error: authError,
   } = await supabase.auth.getUser();
 
-  if ((authError || !user) && !isValidUuid(requestedUserId)) {
-    return NextResponse.json(
-      { success: false, error: { code: "UNAUTHORIZED", message: "Authentication required" } },
-      { status: 401 }
-    );
+  // If no valid UUID is provided, we require authentication
+  if (!isValidUuid(requestedUserId)) {
+    if (authError || !user) {
+      return NextResponse.json(
+        { success: false, error: { code: "UNAUTHORIZED", message: "Authentication required" } },
+        { status: 401 }
+      );
+    }
   }
 
-  const targetUserId = isValidUuid(requestedUserId) ? requestedUserId : user.id;
+  // At this point, either requestedUserId is a valid UUID, or user is guaranteed non-null
+  const targetUserId = isValidUuid(requestedUserId) ? requestedUserId : user!.id;
   const admin = createAdminClient();
 
   let { data, error } = await admin
