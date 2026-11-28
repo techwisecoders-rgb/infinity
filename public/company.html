@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Company</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-radius: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-width: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: #050508;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+
+        :root {
+            --mobile-app-width: 430px;
+        }
+
+        .social-media-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: min(100%, var(--mobile-app-width));
+            min-height: 100vh;
+            margin: 0 auto;
+            background: #050508;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0;
+        }
+
+        .profile-container {
+            width: 100%;
+            max-width: 100%;
+            padding: 0 16px;
+        }
+
+        /* Company category tabs */
+        .company-category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-top: 0;
+            padding: 0;
+        }
+
+        .company-cat-btn {
+            flex: 1;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            padding: 10px 0;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        .company-cat-btn:hover {
+            background: rgba(0, 240, 255, 0.15);
+            color: #fff;
+        }
+
+        .company-cat-btn.active {
+            background: rgba(0, 240, 255, 0.2);
+            border-color: #00f0ff;
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .profile-info-section {
+            padding: 16px 0 0 0;
+        }
+
+        .profile-name-title {
+            font-family: 'Times New Roman', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .profile-description {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 8px;
+            line-height: 1.45;
+        }
+
+        /* Media filter tabs */
+        .profile-tabs-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-top: 18px;
+            padding: 0 4px;
+        }
+
+        .profile-tab-btn {
+            background: transparent;
+            border: 2px solid transparent;
+            border-bottom: 2px solid #ffffff;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Orbitron', 'Rajdhani', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .profile-tab-btn:hover,
+        .profile-tab-btn.active {
+            color: #ffffff;
+        }
+
+        .profile-tab-btn.active {
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #ffffff;
+            border-bottom: none;
+        }
+
+        /* Feed & posts */
+        .social-feed {
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-post-card,
+        .social-post-card :not(i) {
+            font-family: 'Times New Roman', Times, 'Noto Sans Telugu', serif !important;
+            font-style: normal !important;
+            font-weight: 700 !important;
+        }
+
+        .social-post-card {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00f0ff, #ff007f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #fff;
+            flex-shrink: 0;
+            font-size: 0.75rem;
+        }
+
+        .post-author-info h4 {
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .post-author-info span {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .post-text {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
+        }
+
+        .profile-feed-caption[contenteditable="true"] {
+            min-height: 1.4em;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .profile-feed-caption[contenteditable="true"]:focus {
+            box-shadow: 0 0 0 1px rgba(0, 240, 255, 0.45);
+        }
+
+        .profile-feed-caption[contenteditable="true"]:empty::before {
+            color: rgba(255, 255, 255, 0.5);
+            content: attr(data-placeholder);
+            pointer-events: none;
+        }
+
+        .profile-feed-media-editor {
+            display: flex;
+            min-height: 110px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px;
+            border: 1px dashed rgba(0, 240, 255, 0.45);
+            border-radius: 8px;
+            background: rgba(0, 240, 255, 0.04);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
+
+        .profile-feed-upload {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 38px;
+            padding: 8px 14px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 240, 255, 0.5);
+            border-radius: 6px;
+            background: rgba(0, 240, 255, 0.1);
+            color: #00f0ff;
+            cursor: pointer;
+        }
+
+        .profile-feed-upload input {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .profile-feed-media-preview {
+            width: 100%;
+        }
+
+        .profile-feed-media-preview img,
+        .profile-feed-media-preview video {
+            width: 100%;
+            max-height: 350px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-feed-media-preview audio {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .post-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4px;
+        }
+
+        .action-group-left,
+        .action-group-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            color: #00f0ff;
+            transform: scale(1.1);
+        }
+
+        .action-btn.liked {
+            color: #ff0055;
+        }
+
+        .action-btn.bookmarked {
+            color: #ffd700;
+        }
+
+        .action-btn.reposted {
+            color: #00ff66;
+        }
+
+        .action-count {
+            font-size: 0.9rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+        }
+
+        .follow-btn {
+            background: transparent;
+            border: 1px solid #00f0ff;
+            color: #00f0ff;
+            padding: 3px 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-left: auto;
+            transition: all 0.2s ease;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .follow-btn.following {
+            background: #00f0ff;
+            color: #050508;
+        }
+
+        /* Share modal */
+        .share-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .share-modal-overlay.active {
+            display: flex;
+        }
+
+        .share-modal-container {
+            background: #ffffff;
+            color: #000;
+            width: 100%;
+            max-width: 460px;
+            padding: 24px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalPop 0.3s ease;
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .share-modal-title {
+            font-family: Arial, sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #111;
+            width: 100%;
+            text-align: center;
+        }
+
+        .share-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .connect-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .connect-btn {
+            background: #0d0d0d;
+            color: #ffffff;
+            border: none;
+            padding: 14px 16px;
+            font-family: Arial, sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .connect-btn:hover {
+            background: #222222;
+            transform: translateY(-2px);
+        }
+
+        .connect-btn-full {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="social-media-page">
+        <!-- COMPANY SOCIAL ACCOUNT PAGE (standalone – always visible) -->
+        <div class="profile-container" id="personalProfilePage">
+            <!-- TOP COMPANY DIVISION TABS -->
+            <div class="company-category-header">
+                <button class="company-cat-btn active" onclick="switchCompanyCategory('software', this)">SOFTWARE</button>
+                <button class="company-cat-btn" onclick="switchCompanyCategory('edutech', this)">EDUTECH</button>
+            </div>
+
+            <!-- CENTERED COMPANY HEADING -->
+            <h2 style="font-family: Aldrich, 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 1000; text-align: center; color: #00f0ff; margin: 5px 0 0 0; letter-spacing: 1px;">INFINITY COMPANY</h2>
+            <hr style="border: none; height: 1px; background: rgba(0, 240, 255, 0.3); width: 100%; margin: 12px 0 16px 0;">
+
+            <!-- SOFTWARE SECTION & ITS DEDICATED FEED -->
+            <div id="softwareSection" class="company-sub-section">
+
+                <div class="social-feed" id="softwareFeed" style="margin-top: 15px;">
+
+                    <!-- 1. Text Post Slot -->
+                    <div class="social-post-card" data-type="text">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #ff007f, #7f00ff);">HAI</div>
+                            <div class="post-author-info">
+                                <h4>COMPANY MEMBERS</h4>
+                                <span>1 OCT 2026 • 10:00 AM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text profile-feed-caption" contenteditable="true" data-placeholder="Write a software division update..." style="text-align: center; padding: 10px 4px; line-height: 1.6;">
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 0.95rem; font-weight: 800; letter-spacing: 1px;">💫<span style="color: #00f0ff;">HELLO UNIVERSE</span>💫</div>
+                            <div style="font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 600; color: rgba(255, 255, 255, 0.9);">Hearty Welcome To</div>
+
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 1.99rem; font-weight: 900; letter-spacing: 2px; color: yellow; margin: 6px 0; text-shadow: 0 0 10px rgba(255, 0, 127, 0.4);">✨INFINITY✨</div>
+                            <div style="font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 600; color: rgba(255, 255, 255, 0.9);">Introducing You All</div>
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 1.0rem; font-weight: 800; letter-spacing: 0.8px; color: #00ff66; margin-top: 4px;">"THE NEW AGE OF SOCIAL MEDIA"</div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <!-- 2nd Message Text Post Slot -->
+                    <div class="social-post-card" data-type="text">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #00f0ff, #ff007f);">HAI</div>
+                            <div class="post-author-info">
+                                <h4>COMPANY MEMBERS</h4>
+                                <span>1 OCT 2026 • 10:15 AM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text profile-feed-caption" contenteditable="true" data-placeholder="Write a software division update..." style="font-family: 'Times New Roman', Times, serif; text-align: center; padding: 12px 6px; line-height: 1.7;">
+                            <div style="font-size: 1.05rem; font-weight: 700; color: #00f0ff; letter-spacing: 0.5px;">IT'S YOUR WORKSPACE.</div>
+                            <div style="font-size: 1.05rem; font-weight: 700; color: #ff007f; letter-spacing: 0.5px; margin-top: 4px;">IT'S YOUR OFFICE.</div>
+                            <div style="font-size: 1.05rem; font-weight: 700; color: #ffd700; letter-spacing: 0.5px; margin-top: 4px;">IT'S YOUR MARKETPLACE.</div>
+                            <div style="font-size: 1rem; font-weight: 600; color: rgba(255, 255, 255, 0.92); margin-top: 10px;">Overally, It's A</div>
+                            <div style="font-size: 1.3rem; font-weight: 900; color: #00ff66; letter-spacing: 1px; margin-top: 2px;">ALL IN ONE PLATFORM</div>
+                            <div style="font-size: 1.05rem; font-weight: 700; font-style: italic; color: #ff9900; margin-top: 10px;">Whatever You Do, Express Here..</div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <!-- 3rd Message Text Post Slot -->
+                    <div class="social-post-card" data-type="text">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #00ff66, #7f00ff);">HAI</div>
+                            <div class="post-author-info">
+                                <h4>COMPANY MEMBERS</h4>
+                                <span>1 OCT 2026 • 10:30 AM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text" style="text-align: center; padding: 12px 6px; line-height: 1.7;">
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 800; color: #00f0ff; letter-spacing: 0.8px;">Whether You Are A</div>
+                            <div style="margin: 12px auto; max-width: 300px;">
+                                <select aria-label="Select your job role" style="width: 100%; padding: 10px 12px; background: rgba(0, 240, 255, 0.08); border: 1px solid #00f0ff; color: #ffffff; font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; outline: none; cursor: pointer;">
+                                    <option value="" disabled selected style="background: #0a0a12; color: rgba(255,255,255,0.6);">-- Select Your Job Role --</option>
+                                    <option value="Software Engineer" style="background: #0a0a12; color: #ffffff;">Software Engineer</option>
+                                    <option value="Data Scientist" style="background: #0a0a12; color: #ffffff;">Data Scientist</option>
+                                    <option value="UI/UX Designer" style="background: #0a0a12; color: #ffffff;">UI/UX Designer</option>
+                                    <option value="Product Manager" style="background: #0a0a12; color: #ffffff;">Product Manager</option>
+                                    <option value="Web Developer" style="background: #0a0a12; color: #ffffff;">Web Developer</option>
+                                    <option value="Mobile App Developer" style="background: #0a0a12; color: #ffffff;">Mobile App Developer</option>
+                                    <option value="AI / ML Engineer" style="background: #0a0a12; color: #ffffff;">AI / ML Engineer</option>
+                                    <option value="Cloud Architect" style="background: #0a0a12; color: #ffffff;">Cloud Architect</option>
+                                    <option value="Cybersecurity Analyst" style="background: #0a0a12; color: #ffffff;">Cybersecurity Analyst</option>
+                                    <option value="DevOps Engineer" style="background: #0a0a12; color: #ffffff;">DevOps Engineer</option>
+                                    <option value="Full Stack Developer" style="background: #0a0a12; color: #ffffff;">Full Stack Developer</option>
+                                    <option value="Blockchain Developer" style="background: #0a0a12; color: #ffffff;">Blockchain Developer</option>
+                                    <option value="Game Developer" style="background: #0a0a12; color: #ffffff;">Game Developer</option>
+                                    <option value="QA Engineer" style="background: #0a0a12; color: #ffffff;">QA Engineer</option>
+                                    <option value="Database Administrator" style="background: #0a0a12; color: #ffffff;">Database Administrator</option>
+                                    <option value="Network Engineer" style="background: #0a0a12; color: #ffffff;">Network Engineer</option>
+                                    <option value="Systems Administrator" style="background: #0a0a12; color: #ffffff;">Systems Administrator</option>
+                                    <option value="IT Support Specialist" style="background: #0a0a12; color: #ffffff;">IT Support Specialist</option>
+                                    <option value="Graphic Designer" style="background: #0a0a12; color: #ffffff;">Graphic Designer</option>
+                                    <option value="Video Editor" style="background: #0a0a12; color: #ffffff;">Video Editor</option>
+                                    <option value="Content Creator" style="background: #0a0a12; color: #ffffff;">Content Creator</option>
+                                    <option value="Digital Marketer" style="background: #0a0a12; color: #ffffff;">Digital Marketer</option>
+                                    <option value="Copywriter" style="background: #0a0a12; color: #ffffff;">Copywriter</option>
+                                    <option value="Photographer" style="background: #0a0a12; color: #ffffff;">Photographer</option>
+                                    <option value="Filmmaker" style="background: #0a0a12; color: #ffffff;">Filmmaker</option>
+                                    <option value="Music Producer" style="background: #0a0a12; color: #ffffff;">Music Producer</option>
+                                    <option value="Animator" style="background: #0a0a12; color: #ffffff;">Animator</option>
+                                    <option value="3D Artist" style="background: #0a0a12; color: #ffffff;">3D Artist</option>
+                                    <option value="Illustrator" style="background: #0a0a12; color: #ffffff;">Illustrator</option>
+                                    <option value="Voiceover Artist" style="background: #0a0a12; color: #ffffff;">Voiceover Artist</option>
+                                    <option value="Teacher" style="background: #0a0a12; color: #ffffff;">Teacher</option>
+                                    <option value="Professor" style="background: #0a0a12; color: #ffffff;">Professor</option>
+                                    <option value="Academic Tutor" style="background: #0a0a12; color: #ffffff;">Academic Tutor</option>
+                                    <option value="Career Counselor" style="background: #0a0a12; color: #ffffff;">Career Counselor</option>
+                                    <option value="EdTech Specialist" style="background: #0a0a12; color: #ffffff;">EdTech Specialist</option>
+                                    <option value="Doctor" style="background: #0a0a12; color: #ffffff;">Doctor</option>
+                                    <option value="Nurse" style="background: #0a0a12; color: #ffffff;">Nurse</option>
+                                    <option value="Pharmacist" style="background: #0a0a12; color: #ffffff;">Pharmacist</option>
+                                    <option value="Dentist" style="background: #0a0a12; color: #ffffff;">Dentist</option>
+                                    <option value="Physiotherapist" style="background: #0a0a12; color: #ffffff;">Physiotherapist</option>
+                                    <option value="Psychologist" style="background: #0a0a12; color: #ffffff;">Psychologist</option>
+                                    <option value="Surgeon" style="background: #0a0a12; color: #ffffff;">Surgeon</option>
+                                    <option value="Veterinarian" style="background: #0a0a12; color: #ffffff;">Veterinarian</option>
+                                    <option value="Nutritionist" style="background: #0a0a12; color: #ffffff;">Nutritionist</option>
+                                    <option value="Lab Technician" style="background: #0a0a12; color: #ffffff;">Lab Technician</option>
+                                    <option value="Accountant" style="background: #0a0a12; color: #ffffff;">Accountant</option>
+                                    <option value="Financial Analyst" style="background: #0a0a12; color: #ffffff;">Financial Analyst</option>
+                                    <option value="Investment Banker" style="background: #0a0a12; color: #ffffff;">Investment Banker</option>
+                                    <option value="Tax Consultant" style="background: #0a0a12; color: #ffffff;">Tax Consultant</option>
+                                    <option value="Auditor" style="background: #0a0a12; color: #ffffff;">Auditor</option>
+                                    <option value="Lawyer" style="background: #0a0a12; color: #ffffff;">Lawyer</option>
+                                    <option value="Legal Advisor" style="background: #0a0a12; color: #ffffff;">Legal Advisor</option>
+                                    <option value="Paralegal" style="background: #0a0a12; color: #ffffff;">Paralegal</option>
+                                    <option value="Civil Servant" style="background: #0a0a12; color: #ffffff;">Civil Servant</option>
+                                    <option value="Policy Analyst" style="background: #0a0a12; color: #ffffff;">Policy Analyst</option>
+                                    <option value="Entrepreneur" style="background: #0a0a12; color: #ffffff;">Entrepreneur</option>
+                                    <option value="Business Analyst" style="background: #0a0a12; color: #ffffff;">Business Analyst</option>
+                                    <option value="Operations Manager" style="background: #0a0a12; color: #ffffff;">Operations Manager</option>
+                                    <option value="HR Manager" style="background: #0a0a12; color: #ffffff;">HR Manager</option>
+                                    <option value="Recruiter" style="background: #0a0a12; color: #ffffff;">Recruiter</option>
+                                    <option value="Sales Executive" style="background: #0a0a12; color: #ffffff;">Sales Executive</option>
+                                    <option value="Customer Support Specialist" style="background: #0a0a12; color: #ffffff;">Customer Support Specialist</option>
+                                    <option value="Supply Chain Manager" style="background: #0a0a12; color: #ffffff;">Supply Chain Manager</option>
+                                    <option value="Logistics Coordinator" style="background: #0a0a12; color: #ffffff;">Logistics Coordinator</option>
+                                    <option value="Project Manager" style="background: #0a0a12; color: #ffffff;">Project Manager</option>
+                                    <option value="Architect" style="background: #0a0a12; color: #ffffff;">Architect</option>
+                                    <option value="Civil Engineer" style="background: #0a0a12; color: #ffffff;">Civil Engineer</option>
+                                    <option value="Mechanical Engineer" style="background: #0a0a12; color: #ffffff;">Mechanical Engineer</option>
+                                    <option value="Electrical Engineer" style="background: #0a0a12; color: #ffffff;">Electrical Engineer</option>
+                                    <option value="Aerospace Engineer" style="background: #0a0a12; color: #ffffff;">Aerospace Engineer</option>
+                                    <option value="Chemical Engineer" style="background: #0a0a12; color: #ffffff;">Chemical Engineer</option>
+                                    <option value="Robotics Engineer" style="background: #0a0a12; color: #ffffff;">Robotics Engineer</option>
+                                    <option value="Environmental Scientist" style="background: #0a0a12; color: #ffffff;">Environmental Scientist</option>
+                                    <option value="Research Scientist" style="background: #0a0a12; color: #ffffff;">Research Scientist</option>
+                                    <option value="Biotechnologist" style="background: #0a0a12; color: #ffffff;">Biotechnologist</option>
+                                    <option value="Journalist" style="background: #0a0a12; color: #ffffff;">Journalist</option>
+                                    <option value="News Anchor" style="background: #0a0a12; color: #ffffff;">News Anchor</option>
+                                    <option value="Podcaster" style="background: #0a0a12; color: #ffffff;">Podcaster</option>
+                                    <option value="Author" style="background: #0a0a12; color: #ffffff;">Author</option>
+                                    <option value="Translator" style="background: #0a0a12; color: #ffffff;">Translator</option>
+                                    <option value="Social Media Manager" style="background: #0a0a12; color: #ffffff;">Social Media Manager</option>
+                                    <option value="Brand Strategist" style="background: #0a0a12; color: #ffffff;">Brand Strategist</option>
+                                    <option value="Event Planner" style="background: #0a0a12; color: #ffffff;">Event Planner</option>
+                                    <option value="Real Estate Agent" style="background: #0a0a12; color: #ffffff;">Real Estate Agent</option>
+                                    <option value="Interior Designer" style="background: #0a0a12; color: #ffffff;">Interior Designer</option>
+                                    <option value="Fashion Designer" style="background: #0a0a12; color: #ffffff;">Fashion Designer</option>
+                                    <option value="Chef" style="background: #0a0a12; color: #ffffff;">Chef</option>
+                                    <option value="Baker" style="background: #0a0a12; color: #ffffff;">Baker</option>
+                                    <option value="Hotel Manager" style="background: #0a0a12; color: #ffffff;">Hotel Manager</option>
+                                    <option value="Travel Agent" style="background: #0a0a12; color: #ffffff;">Travel Agent</option>
+                                    <option value="Pilot" style="background: #0a0a12; color: #ffffff;">Pilot</option>
+                                    <option value="Flight Attendant" style="background: #0a0a12; color: #ffffff;">Flight Attendant</option>
+                                    <option value="Electrician" style="background: #0a0a12; color: #ffffff;">Electrician</option>
+                                    <option value="Carpenter" style="background: #0a0a12; color: #ffffff;">Carpenter</option>
+                                    <option value="Mechanic" style="background: #0a0a12; color: #ffffff;">Mechanic</option>
+                                    <option value="Fitness Trainer" style="background: #0a0a12; color: #ffffff;">Fitness Trainer</option>
+                                    <option value="Yoga Instructor" style="background: #0a0a12; color: #ffffff;">Yoga Instructor</option>
+                                    <option value="Sports Coach" style="background: #0a0a12; color: #ffffff;">Sports Coach</option>
+                                    <option value="Social Worker" style="background: #0a0a12; color: #ffffff;">Social Worker</option>
+                                    <option value="Freelancer" style="background: #0a0a12; color: #ffffff;">Freelancer</option>
+                                </select>
+                            </div>
+                            <div style="font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 700; color: #ff007f; margin-top: 6px;">Whatever Job You Do</div>
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 800; color: #00ff66; letter-spacing: 0.8px; margin-top: 2px;">Just Express Here Everything</div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <!-- 4th Message Image Post Slot -->
+                    <div class="social-post-card" data-type="image">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #ff9900, #ff007f);">HAI</div>
+                            <div class="post-author-info">
+                                <h4>COMPANY MEMBERS</h4>
+                                <span>1 OCT 2026 • 10:45 AM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text profile-feed-caption" contenteditable="true" data-placeholder="Add image caption..." style="text-align: center; padding: 6px 4px; line-height: 1.5;">
+                            <div style="font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 700; color: #00f0ff; letter-spacing: 0.6px;">Launching Our Social Media</div>
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 900; color: yellow; letter-spacing: 1px; margin-top: 2px;"><span style="color: orange">"Infinity"</span> Official Logo</div>
+                        </div>
+                        <div class="profile-feed-media-preview">
+                            <img src="https://cdn.corenexis.com/f/09YGTjp0.png">
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <!-- 5th Message Board of Directors Post Slot -->
+                    <div class="social-post-card" data-type="text">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #ffd700, #ff007f);">HAI</div>
+                            <div class="post-author-info">
+                                <h4>COMPANY MEMBERS</h4>
+                                <span>1 OCT 2026 • 11:00 AM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text" style="text-align: center; padding: 10px 4px;">
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 800; color: #00f0ff; letter-spacing: 1px;">OUR UNIVERSAL FOUNDER</div>
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 800; color: #00ff66; letter-spacing: 1px; margin-top: 4px;">OUR UNIVERSAL CEO</div>
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 900; color: yellow; letter-spacing: 1.2px; margin-top: 6px; margin-bottom: 14px;">OUR BOARD OF DIRECTORS</div>
+
+                            <!-- Middle Chair (Centerpiece) -->
+                            <div style="background: rgba(255, 0, 127, 0.12); border: 1px solid orange; padding: 10px 8px; margin-bottom: 10px; box-shadow: 0 0 12px rgba(255, 0, 127, 0.2);">
+
+                                <div style="font-family: 'Orbitron', sans-serif; font-size: 0.95rem; font-weight: 900; color: #ffffff; margin-top: 3px; letter-spacing: 0.5px;">KUTIKUPPALA PRIYANKA</div>
+                            </div>
+
+                            <!-- Left & Right Chairs -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                                <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.45); padding: 9px 6px;">
+
+                                    <div style="font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 700; color: #ffffff; margin-top: 3px;">TAMMINENI JHANSIRANI</div>
+                                </div>
+                                <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.45); padding: 9px 6px;">
+
+                                    <div style="font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 700; color: #ffffff; margin-top: 3px;">TAMMINENI RAMANARAO</div>
+                                </div>
+                            </div>
+
+                            <!-- Left First & Right Second Chairs -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                                <div style="background: rgba(0, 255, 102, 0.07); border: 1px solid rgba(0, 255, 102, 0.4); padding: 9px 6px;">
+
+                                    <div style="font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 700; color: #ffffff; margin-top: 3px;">PERUMALLA SURYA KOWSHIK</div>
+                                </div>
+                                <div style="background: rgba(0, 255, 102, 0.07); border: 1px solid rgba(0, 255, 102, 0.4); padding: 9px 6px;">
+
+                                    <div style="font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 700; color: #ffffff; margin-top: 3px;">MALLU MOUNITH REDDY</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <!-- 6th Message Explore Carousel Post Slot -->
+                    <div class="social-post-card" data-type="image">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #00f0ff, #7f00ff);">HAI</div>
+                            <div class="post-author-info">
+                                <h4>COMPANY MEMBERS</h4>
+                                <span>1 OCT 2026 • 11:15 AM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text" style="text-align: center; padding: 6px 4px 10px 4px; line-height: 1.5;">
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 900; color: #00f0ff; letter-spacing: 1px;">EXPLORE THE <span style="color: yellow">"INFINITY"</span></div>
+                            <div style="font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; color: #00ff66; letter-spacing: 1.2px; margin-top: 2px;">EVERY CORNER OF THE UNIVERSE</div>
+                        </div>
+
+                        <!-- Carousel Container -->
+                        <div id="exploreInfinityCarousel" style="position: relative; width: 100%; border: 1px solid rgba(0, 240, 255, 0.35); background: rgba(0, 240, 255, 0.04); overflow: hidden;">
+                            <div class="explore-slide" style="display: block;">
+                                <div style="padding: 10px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.2); text-align: center;">
+                                    <div style="font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 800; color: #ffffff; letter-spacing: 1px;">HOME PAGE</div>
+                                    <div style="font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 600; color: #00f0ff; margin-top: 2px;">PUBLIC FEED</div>
+                                </div>
+                                <img src="https://cdn.corenexis.com/f/45K2upzx.jpeg" alt="HOME PAGE" style="width: 100%; max-height: 360px; object-fit: contain; display: block; background: #050508;">
+                            </div>
+                            <div class="explore-slide" style="display: none;">
+                                <div style="padding: 10px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.2); text-align: center;">
+                                    <div style="font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 800; color: #ffffff; letter-spacing: 1px;">SPACE</div>
+
+                                </div>
+                                <img src="https://cdn.corenexis.com/f/AaYkpzWc.png" alt="NETWORK PAGE" style="width: 100%; max-height: 360px; object-fit: contain; display: block; background: #050508;">
+                            </div>
+
+                            <!-- Prev / Next Controls -->
+                            <button type="button" onclick="moveExploreCarousel(-1)" aria-label="Previous slide" style="position: absolute; top: 55%; left: 8px; transform: translateY(-50%); background: rgba(5, 5, 8, 0.8); border: 1px solid #00f0ff; color: #00f0ff; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button type="button" onclick="moveExploreCarousel(1)" aria-label="Next slide" style="position: absolute; top: 55%; right: 8px; transform: translateY(-50%); background: rgba(5, 5, 8, 0.8); border: 1px solid #00f0ff; color: #00f0ff; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+
+                        </div>
+
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <!-- 7th Message Support QR Post Slot -->
+                    <div class="social-post-card" data-type="image">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #00ff66, #00f0ff);">HAI</div>
+                            <div class="post-author-info">
+                                <h4>COMPANY MEMBERS</h4>
+                                <span>1 OCT 2026 • 11:25 AM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text profile-feed-caption" contenteditable="true" data-placeholder="Add support message..." style="text-align: center; padding: 8px 4px; line-height: 1.5;">
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 800; letter-spacing: 0.8px;">
+                                <span style="color: #00f0ff;">Support Us</span>
+                                <span style="color: rgba(255,255,255,0.5);"> / </span>
+                                <span style="color: #ff007f;">Donate For Us</span>
+                                <span style="color: rgba(255,255,255,0.5);"> / </span>
+                                <span style="color: #00ff66;">Sponsor Us</span>
+                            </div>
+                        </div>
+                        <div class="profile-feed-media-preview" style="text-align: center; padding: 6px 0;">
+                            <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.4); padding: 10px 12px;">
+                                <span style="font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; color: #00f0ff;"><i class="fa-solid fa-phone" style="margin-right: 6px;"></i>Ph No: </span>
+                                <a href="tel:9963935878" style="font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 800; color: #ffffff; text-decoration: none; letter-spacing: 0.8px;">9963935878</a>
+                            </div>
+                            <div style="font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 600; color: rgba(255, 255, 255, 0.75); margin-top: 8px; letter-spacing: 0.5px;">SCAN QR TO SUPPORT INFINITY</div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <!-- Final Contact Post -->
+                    <div class="social-post-card" data-type="text">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #00f0ff, #ff007f);">HAI</div>
+                            <div class="post-author-info">
+                                <h4>COMPANY MEMBERS</h4>
+                                <span>1 OCT 2026 • 11:35 AM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text" style="padding: 12px 6px; display: flex; flex-direction: column; gap: 10px; text-align: center;">
+                            <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.4); padding: 10px 12px;">
+                                <span style="font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; color: #00f0ff;"><i class="fa-solid fa-phone" style="margin-right: 6px;"></i>Ph No: </span>
+                                <a href="tel:9963935878" style="font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 800; color: #ffffff; text-decoration: none; letter-spacing: 0.8px;">9963935878</a>
+                            </div>
+                            <div style="background: rgba(255, 0, 127, 0.08); border: 1px solid rgba(255, 0, 127, 0.4); padding: 10px 12px; word-break: break-all;">
+                                <span style="font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; color: #ff007f;"><i class="fa-solid fa-envelope" style="margin-right: 6px;"></i>Email: </span>
+                                <a href="mailto:universalcompanyteam@gmail.com" style="font-family: 'Rajdhani', sans-serif; font-size: 1.02rem; font-weight: 700; color: #00ff66; text-decoration: underline;">universalcompanyteam@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <div class="social-post-card" data-type="text">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #00f0ff, #ff007f);">HAI</div>
+                            <div class="post-author-info">
+                                <h4>COMPANY MEMBERS</h4>
+                                <span>1 OCT 2026 • 10:15 AM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text profile-feed-caption" contenteditable="true" data-placeholder="Write a software division update..." style="font-family: 'Times New Roman', Times, serif; text-align: center; padding: 12px 6px; line-height: 1.7;">
+                            <div style="font-size: 1.05rem; font-weight: 700; color: #00f0ff; letter-spacing: 0.5px;">THIS IS JUST THE BEGINNING</div>
+
+                            <div style="font-size: 1.05rem; font-weight: 700; color: #ffd700; letter-spacing: 0.5px; margin-top: 4px;">THE MAIN CORE INNOVATION</div>
+
+                            <div style="font-size: 1.3rem; font-weight: 900; color: #00ff66; letter-spacing: 1px; margin-top: 2px;">IS ABOUT TO LAUNCH</div>
+
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+
+                </div>
+            </div>
+
+            <!-- EDUTECH SECTION & ITS DEDICATED FEED (Hidden by default) -->
+            <div id="edutechSection" class="company-sub-section" style="display: none;">
+
+                <div class="social-feed" id="edutechFeed" style="margin-top: 15px;">
+                    <!-- 1. Edutech Text Post -->
+                    <div class="social-post-card" data-type="text">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #00f0ff, #00ff66);">EDU</div>
+                            <div class="post-author-info">
+                                <h4>ADHARSHAM VAIVIDYALAYAM</h4>
+                                <span>2 OCT 2026 • 11:00 AM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text profile-feed-caption" contenteditable="true" data-placeholder="Write an edutech curriculum update..." style="text-align: center; padding: 12px 6px; line-height: 1.65;">
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 0.95rem; font-weight: 800; letter-spacing: 1px;">💫<span style="color: #00f0ff;">HELLO UNIVERSE</span>💫</div>
+                            <div style="font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 700; color: white; margin-top: 6px; letter-spacing: 0.6px;">Hearty Welcome To</div>
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 1.15rem; font-weight: 900; letter-spacing: 1.2px; color: yellow; margin: 6px 0; text-shadow: 0 0 10px rgba(255, 0, 127, 0.35);">✨ADHARSHAM VAIVIDYALAYAM✨</div>
+                            <div style="font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 700; color: #00ff66; letter-spacing: 0.5px;">Where Your Child Is Our Child</div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <!-- 2nd Edutech Image Post -->
+                    <div class="social-post-card" data-type="image">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #00f0ff, #ff007f);">EDU</div>
+                            <div class="post-author-info">
+                                <h4>ADHARSHAM VAIVIDYALAYAM</h4>
+                                <span>2 OCT 2026 • 11:30 AM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text profile-feed-caption" contenteditable="true" data-placeholder="Add caption..." style="text-align: center; padding: 8px 4px; line-height: 1.55;">
+                            <div style="font-family: 'Orbitron', sans-serif; font-size: 1.15rem; font-weight: 900; color: #ffffff; letter-spacing: 1px;">Universal Educations</div>
+                            <div style="text-align: center; margin-top: 6px;">
+                                <a href="https://www.universaleducations.com" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 10px 20px; background: rgba(0, 240, 255, 0.14); border: 1px solid #00f0ff; color: #00f0ff; text-decoration: none; font-size: 0.95rem; letter-spacing: 0.6px; box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);">
+                                    <i class="fa-solid fa-globe" style="margin-right: 6px;"></i>www.universaleducations.com
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="profile-feed-media-preview">
+                            <img src="https://cdn.corenexis.com/f/rucd455e.png" alt="Universal Educations" style="width: 100%; max-height: 360px; object-fit: contain; background: #050508; border: 1px solid rgba(0, 240, 255, 0.25);">
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <!-- 3rd Edutech Text Post -->
+                    <div class="social-post-card" data-type="text">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #ffd700, #00ff66);">EDU</div>
+                            <div class="post-author-info">
+                                <h4>ADHARSHAM VAIVIDYALAYAM</h4>
+                                <span>2 OCT 2026 • 12:00 PM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text profile-feed-caption" contenteditable="true" data-placeholder="Add caption..." style="text-align: center; padding: 12px 6px; line-height: 1.7;">
+                            <div style="font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; color: #00ff66; letter-spacing: 0.4px;">Every child has unique talents.</div>
+                            <div style="font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 600; color: rgba(255, 255, 255, 0.9); margin-top: 6px;">So looking deeply into</div>
+                            <div style="text-align: center; margin-top: 6px;">
+                                <a href="https://www.sirchildren.com" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 10px 20px; background: rgba(0, 240, 255, 0.14); border: 1px solid #00f0ff; color: #00f0ff; text-decoration: none; font-size: 0.95rem; letter-spacing: 0.6px; box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);">
+                                    <i class="fa-solid fa-globe" style="margin-right: 6px;"></i>www.sirchildren.com
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <!-- 4th Edutech Text Post -->
+                    <div class="social-post-card" data-type="text">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #ff007f, #00f0ff);">EDU</div>
+                            <div class="post-author-info">
+                                <h4>ADHARSHAM VAIVIDYALAYAM</h4>
+                                <span>2 OCT 2026 • 12:30 PM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text profile-feed-caption" contenteditable="true" data-placeholder="Add caption..." style="padding: 8px 2px; display: flex; flex-direction: column; gap: 8px;">
+                            <div style="border-left: 3px solid #00f0ff; background: rgba(0, 240, 255, 0.06); padding: 8px 10px; font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; color: #ffffff; letter-spacing: 0.4px;">
+                                WE WILL FULFILL YOUR DREAMS, <span style="color: #00f0ff;">YOUR AIMS, YOUR TARGETS, YOUR GOALS</span>
+                            </div>
+                            <div style="border-left: 3px solid #ff007f; background: rgba(255, 0, 127, 0.06); padding: 8px 10px; font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; color: #ffffff; letter-spacing: 0.4px;">
+                                IF YOU ARE DEFINED BY YOUR SKILLS AND TALENTS, <span style="color: #ff007f;">THEN WE WILL BUILD YOUR FUTURE</span>
+                            </div>
+                            <div style="border-left: 3px solid #00ff66; background: rgba(0, 255, 102, 0.06); padding: 8px 10px; font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; color: #ffffff; letter-spacing: 0.4px;">
+                                IF YOU HAVE THE VISION, <span style="color: #00ff66;">WE WILL TURN IT INTO REALITY</span>
+                            </div>
+                            <div style="border-left: 3px solid #ffd700; background: rgba(255, 215, 0, 0.06); padding: 8px 10px; font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; color: #ffffff; letter-spacing: 0.4px;">
+                                IF YOU HAVE INNOVATIVE IDEAS, <span style="color: #ffd700;">WE WILL GIVE THEM LIFE</span>
+                            </div>
+                            <div style="border-left: 3px solid #c084fc; background: rgba(192, 132, 252, 0.07); padding: 8px 10px; font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; color: #ffffff; letter-spacing: 0.4px;">
+                                EACH AND EVERY STUDENT SHOULD GET <span style="color: #c084fc;">EQUAL OPPORTUNITIES.</span>
+                            </div>
+                            <div style="border-left: 3px solid #ff9900; background: rgba(255, 153, 0, 0.08); padding: 9px 10px; font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 900; color: #ff9900; letter-spacing: 0.8px; text-align: center;">
+                                MERIT BASED SCHOLARSHIPS
+                            </div>
+                            <div style="text-align: center; margin-top: 6px;">
+                                <a href="https://www.universalstartups.com" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 10px 20px; background: rgba(0, 240, 255, 0.14); border: 1px solid #00f0ff; color: #00f0ff; text-decoration: none; font-size: 0.95rem; letter-spacing: 0.6px; box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);">
+                                    <i class="fa-solid fa-globe" style="margin-right: 6px;"></i>www.universalstartups.com
+                                </a>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <!-- 5th Edutech Telugu Message Post -->
+                    <div class="social-post-card" data-type="text">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #00f0ff, #ffd700);">EDU</div>
+                            <div class="post-author-info">
+                                <h4>ADHARSHAM VAIVIDYALAYAM</h4>
+                                <span>2 OCT 2026 • 1:00 PM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text profile-feed-caption" contenteditable="true" data-placeholder="Add caption..." style="font-family: 'Noto Sans Telugu', 'Rajdhani', sans-serif; padding: 10px 4px; line-height: 1.75; font-size: 0.96rem; color: rgba(255, 255, 255, 0.92); display: flex; flex-direction: column; gap: 12px;">
+                            <div style="border-left: 3px solid #00f0ff; padding-left: 10px;">
+                                పేదరికం వల్లగాని, వైకల్యం వల్లగాని ఎటువంటి ప్రతికూల పరిస్థితుల వల్లనైనా సరే విద్యార్థుల చదువు ఆగరాదని <span style="color: #00f0ff; font-weight: 700;">ఆదర్శమ్ వైవిద్యాలయన్</span> ఉపాధ్యాయులుగా మేము ప్రతి విద్యార్థికు నాణ్యమైన సమాన విద్యావకాశాలను అందించేందుకు పలుకుతున్నాము నవశకానికి నాంది.
+                            </div>
+
+                            <div style="border-left: 3px solid #ffd700; padding-left: 10px;">
+                                ఉన్నత చదువులు చదువుకునే దిశగా, మట్టిలో మాణిక్యాలను, లోకజ్ఞానం కలిగిన పిల్లలను, తెలివిగల విద్యార్థులను, నలుమూలలున్న ప్రతిభావంతుల్ని వెలికి తీయడం కొరకై, మేము <span style="color: #ffd700; font-weight: 700;">మహాద్భుతమైన శుభప్రదముగల స్కాలర్షిప్ పరీక్షను</span> నిర్వహిస్తున్నాము.
+                            </div>
+
+                            <div style="background: rgba(255, 0, 127, 0.08); border: 1px solid rgba(255, 0, 127, 0.45); padding: 10px 12px;">
+                                <span style="color: #ff007f; font-weight: 800;">✔︎✯☞ టాప్ ర్యాంకర్లుగా</span> ఉత్తీర్ణత సాధించుకున్న అగ్రశ్రేణులకు, విద్యార్థులు కలలుగన్న, కోరుకున్న పాఠశాలలో అడ్మిషన్, <span style="color: #00ff66; font-weight: 700;">నూరు శాతం స్కాలర్షిప్ ఎమౌంట్, ఉపకార వేతనాలు</span> పొందుతారు. ఆ విద్యాసంవత్సరం మొత్తము మీద చెల్లించాల్సిన ఫీజుకు మేము బాధ్యత వహిస్తాము.
+                            </div>
+
+                            <div style="background: rgba(0, 255, 102, 0.07); border: 1px solid rgba(0, 255, 102, 0.4); padding: 10px 12px;">
+                                <span style="color: #00ff66; font-weight: 800;">✔︎✯☞ రెండో లెవెల్లో</span> ఉత్తీర్ణత సాధించుకున్న మెరిట్ విద్యార్థులకు ప్రైజ్ మనీ లభిస్తుంది. మన ఆదర్శమ్ వైవిద్యాలయన్ పాఠశాల నందు ఉన్న ఫీజులుకన్నా, విద్యార్థి కోరుకున్న, వెసులుబాటుగా భావించిన వేరొక పాఠశాల నందు ఇంక ఎంత అధికంగా చెల్లించవలసి వస్తుందో లెక్కించి, విద్యార్థులకు ఆ మిగిలిన ఎమౌంటును ప్రైజ్ మనీగా అందిస్తాము.
+                            </div>
+
+                            <div style="background: rgba(0, 240, 255, 0.07); border-top: 2px solid #00f0ff; padding: 10px 12px;">
+                                <div style="color: #00f0ff; font-weight: 800; font-size: 1.02rem; margin-bottom: 4px;">మా అంతిమ లక్ష్యం:</div>
+                                విద్యార్థులు కన్నా లక్ష్యాలను సాకారం చేయడమే మా అంతిమ లక్ష్యం. వాల కలల ప్రపంచాన్ని నిజం చేపిస్తాము. ఓ గొప్ప సాధకులుగా తీర్చిదిద్దుతాము. ప్రతి విద్యార్థిలో ఆత్మవిశ్వాసాన్ని పెంపొందిస్తాము. సమాజానికి ఉపయోగపడే బాధ్యతాయుత పౌరులుగా తయారు చేస్తాము. ప్రపంచమే తన వైపు చూసేలా విద్యార్థులను మార్గనిర్దేశం చేస్తాము.
+                            </div>
+                            <div class="profile-feed-media-preview">
+                                <img src="https://cdn.corenexis.com/f/kHv2m09R.png" alt="Universal Educations" style="width: 100%; max-height: 360px; object-fit: contain; background: #050508; border: 1px solid rgba(0, 240, 255, 0.25);">
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                    <!-- Final Contact Post -->
+                    <div class="social-post-card" data-type="text">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: linear-gradient(135deg, #00ff66, #00f0ff);">EDU</div>
+                            <div class="post-author-info">
+                                <h4>ADHARSHAM VAIVIDYALAYAM</h4>
+                                <span>2 OCT 2026 • 1:30 PM</span>
+                            </div>
+                            <button class="follow-btn" onclick="toggleFollow(this)">+ Follow</button>
+                        </div>
+                        <div class="post-text" style="padding: 12px 6px; display: flex; flex-direction: column; gap: 10px; text-align: center;">
+                            <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.4); padding: 10px 12px;">
+                                <span style="font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; color: #00f0ff;"><i class="fa-solid fa-phone" style="margin-right: 6px;"></i>Ph No: </span>
+                                <a href="tel:9963935878" style="font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 800; color: #ffffff; text-decoration: none; letter-spacing: 0.8px;">9963935878</a>
+                            </div>
+                            <div style="background: rgba(255, 0, 127, 0.08); border: 1px solid rgba(255, 0, 127, 0.4); padding: 10px 12px; word-break: break-all;">
+                                <span style="font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700; color: #ff007f;"><i class="fa-solid fa-envelope" style="margin-right: 6px;"></i>Email: </span>
+                                <a href="mailto:universalcompanyteam@gmail.com" style="font-family: 'Rajdhani', sans-serif; font-size: 1.02rem; font-weight: 700; color: #00ff66; text-decoration: underline;">universalcompanyteam@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-group-left">
+                                <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-heart"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="alert('Opening comments...')"><i class="fa-regular fa-comment"></i><span class="action-count">1</span></button>
+                                <button class="action-btn" onclick="toggleRepost(this)"><i class="fa-solid fa-retweet"></i><span class="action-count">1</span></button>
+                            </div>
+                            <div class="action-group-right">
+                                <button class="action-btn" onclick="window.location.href='tel:+919963935878'" title="Phone"><i class="fa-solid fa-phone"></i></button>
+                                <button class="action-btn" onclick="window.location.href='mailto:universalcompanyteam@gmail.com'" title="Mail"><i class="fa-solid fa-envelope"></i></button>
+                                <button class="action-btn" onclick="window.open('https://maps.google.com', '_blank')" title="Location"><i class="fa-solid fa-location-dot"></i></button>
+                                <button class="action-btn" onclick="window.open('https://wa.me/919963935878', '_blank')" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                                <button class="action-btn" onclick="openShareModal(this)" title="Share"><i class="fa-regular fa-paper-plane"></i></button>
+                                <button class="action-btn" onclick="downloadPostMedia(this)" title="Download"><i class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Share Modal -->
+    <div class="share-modal-overlay" id="shareModalOverlay" onclick="closeShareModal(event)">
+        <div class="share-modal-container" onclick="event.stopPropagation()">
+            <button class="share-modal-close" onclick="closeShareModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h2 class="share-modal-title">SEND TO UNIVERSE</h2>
+            <div class="connect-grid">
+                <a href="tel:9963935878" class="connect-btn"><i class="fa-solid fa-phone"></i> CALL</a>
+                <a href="https://maps.google.com" target="_blank" class="connect-btn"><i class="fa-solid fa-location-dot" style="color: #ff4d4d;"></i> LOCATION</a>
+                <a href="https://www.haisuperhero.com" target="_blank" class="connect-btn"><i class="fa-solid fa-globe" style="color: #00f0ff;"></i> WEBSITE</a>
+                <a href="https://www.youtube.com" target="_blank" class="connect-btn"><i class="fa-solid fa-play" style="color: #ff0000;"></i> YOUTUBE</a>
+                <a href="#" class="connect-btn"><i class="fa-solid fa-mobile-screen-button"></i> APP</a>
+                <a href="https://twitter.com" target="_blank" class="connect-btn"><i class="fa-brands fa-x-twitter"></i> TWITTER / X</a>
+                <a href="https://facebook.com" target="_blank" class="connect-btn"><i class="fa-brands fa-facebook-f" style="color: #1877f2;"></i> FACEBOOK</a>
+                <a href="https://linkedin.com" target="_blank" class="connect-btn"><i class="fa-brands fa-linkedin-in" style="color: #0a66c2;"></i> LINKEDIN</a>
+                <a href="https://instagram.com" target="_blank" class="connect-btn"><i class="fa-solid fa-circle-dot"></i> INSTAGRAM</a>
+                <a href="https://telegram.org" target="_blank" class="connect-btn"><i class="fa-solid fa-paper-plane" style="color: #24a1de;"></i> TELEGRAM</a>
+                <a href="https://justdial.com" target="_blank" class="connect-btn"><i class="fa-solid fa-phone-volume"></i> JUST DIAL</a>
+                <a href="https://whatsapp.com" target="_blank" class="connect-btn"><i class="fa-solid fa-comment-dots" style="color: #25d366;"></i> WHATSAPP CHANNEL</a>
+                <a href="https://google.com" target="_blank" class="connect-btn connect-btn-full"><i class="fa-regular fa-paper-plane"></i> SHARE TO ALL</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleLike(btn) {
+            const icon = btn.querySelector('i');
+            const count = btn.querySelector('.action-count');
+            if (!count) return;
+            btn.classList.toggle('liked');
+            icon.className = btn.classList.contains('liked') ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+            count.textContent = parseInt(count.textContent) + (btn.classList.contains('liked') ? 1 : -1);
+        }
+
+        function toggleBookmark(btn) {
+            btn.classList.toggle('bookmarked');
+            btn.querySelector('i').className = btn.classList.contains('bookmarked') ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark';
+        }
+
+        function toggleRepost(btn) {
+            const count = btn.querySelector('.action-count');
+            if (!count) return;
+            btn.classList.toggle('reposted');
+            count.textContent = parseInt(count.textContent) + (btn.classList.contains('reposted') ? 1 : -1);
+        }
+
+        function toggleFollow(btn) {
+            btn.classList.toggle('following');
+            btn.textContent = btn.classList.contains('following') ? 'Following' : '+ Follow';
+        }
+
+        function openShareModal() {
+            document.getElementById('shareModalOverlay').classList.add('active');
+        }
+
+        function closeShareModal(event) {
+            if (event && event.target !== event.currentTarget && !event.target.closest('.share-modal-close')) return;
+            document.getElementById('shareModalOverlay').classList.remove('active');
+        }
+
+        function switchCompanyCategory(category, element) {
+            document.querySelectorAll('.company-cat-btn').forEach(btn => btn.classList.remove('active'));
+            if (element) element.classList.add('active');
+
+            const softwareSec = document.getElementById('softwareSection');
+            const edutechSec = document.getElementById('edutechSection');
+            const softwareFeed = document.getElementById('softwareFeed');
+            const edutechFeed = document.getElementById('edutechFeed');
+
+            if (category === 'software') {
+                softwareSec.style.display = 'block';
+                edutechSec.style.display = 'none';
+                softwareFeed.style.display = 'flex';
+                edutechFeed.style.display = 'none';
+            } else if (category === 'edutech') {
+                softwareSec.style.display = 'none';
+                edutechSec.style.display = 'block';
+                softwareFeed.style.display = 'none';
+                edutechFeed.style.display = 'flex';
+            }
+        }
+
+        function filterPersonalTab(type, element) {
+            document.querySelectorAll('#personalProfilePage .profile-tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (element) element.classList.add('active');
+
+            const activeDivisionFeed = document.getElementById('softwareSection').style.display !== 'none' ?
+                document.getElementById('softwareFeed') :
+                document.getElementById('edutechFeed');
+
+            const posts = activeDivisionFeed.querySelectorAll('.social-post-card');
+            posts.forEach(post => {
+                const postType = post.getAttribute('data-type');
+                post.style.display = (type === 'all' || postType === type) ? 'flex' : 'none';
+            });
+        }
+
+        function handleCompanyMediaUpload(input, type) {
+            const card = input.closest('.social-post-card');
+            const previewContainer = card.querySelector('.profile-feed-media-preview');
+            const editorBox = card.querySelector('.profile-feed-media-editor');
+
+            if (!input.files || !input.files[0]) return;
+            const file = input.files[0];
+            const fileUrl = URL.createObjectURL(file);
+
+            editorBox.style.display = 'none';
+            previewContainer.innerHTML = '';
+
+            if (type === 'image') {
+                previewContainer.innerHTML = `<img src="${fileUrl}" alt="${file.name}" style="width: 100%; max-height: 350px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1);">`;
+            } else if (type === 'video') {
+                previewContainer.innerHTML = `<video src="${fileUrl}" controls playsinline style="width: 100%; max-height: 350px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1);"></video>`;
+            } else if (type === 'audio') {
+                previewContainer.innerHTML = `<audio src="${fileUrl}" controls style="width: 100%; margin-top: 5px;"></audio>`;
+            } else if (type === 'file') {
+                const sizeKB = (file.size / 1024).toFixed(1);
+                previewContainer.innerHTML = `
+            <div style="background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 8px; padding: 14px; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="fa-solid fa-file-lines" style="font-size: 2.2rem; color: #ff007f;"></i>
+                    <div>
+                        <div style="font-weight: 700; font-size: 0.95rem; color: #fff;">${file.name}</div>
+                        <div style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.6);">${sizeKB} KB</div>
+                    </div>
+                </div>
+                <a href="${fileUrl}" download="${file.name}" style="background: rgba(0, 240, 255, 0.1); padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(0, 240, 255, 0.3); color: #00f0ff; text-decoration: none; font-size: 1rem;">
+                    <i class="fa-solid fa-download"></i>
+                </a>
+            </div>`;
+            }
+        }
+
+        let exploreSlideIndex = 0;
+
+        function goToExploreSlide(index) {
+            const carousel = document.getElementById('exploreInfinityCarousel');
+            if (!carousel) return;
+            const slides = carousel.querySelectorAll('.explore-slide');
+            const dots = carousel.querySelectorAll('.explore-dot');
+            const counter = document.getElementById('exploreSlideCounter');
+            if (!slides.length) return;
+
+            exploreSlideIndex = (index + slides.length) % slides.length;
+            slides.forEach((slide, i) => {
+                slide.style.display = i === exploreSlideIndex ? 'block' : 'none';
+            });
+            dots.forEach((dot, i) => {
+                dot.style.background = i === exploreSlideIndex ? '#00f0ff' : 'transparent';
+            });
+            if (counter) {
+                counter.textContent = `${exploreSlideIndex + 1} / ${slides.length}`;
+            }
+        }
+
+        function moveExploreCarousel(step) {
+            goToExploreSlide(exploreSlideIndex + step);
+        }
+    </script>
+</body>
+
+</html>
